@@ -10,12 +10,19 @@ use App\Models\Teacher;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class StudentsController extends Controller
 {
     public function index(){
         return view('auth.login');
      }
+
+     public function admin_login(){
+        return view('welcome');
+     }
+
 
 
      public function dash(){
@@ -124,8 +131,6 @@ class StudentsController extends Controller
 }
    
    
-   
-  
    public function home(){
 
     $students=Student::all();
@@ -136,18 +141,24 @@ class StudentsController extends Controller
    }
 
    
-  
-   public function logout(){
-     Session::flush();
-     Auth::logout();
-     return redirect('');    
-
-  }
+   public function logout()
+   {
+       Log::info('Before logout: ' . json_encode(session()->all()));
+   
+       Session::flush();
+       Auth::logout();
+   
+       Log::info('After logout: ' . json_encode(session()->all()));
+   
+       return redirect('');
+   }
+   
 
 
   public function destroy(Student $student){
     $student->delete();
     return redirect(route('dashboard'))->with('success','Admin deleted successfully');
 }
+
 
 }

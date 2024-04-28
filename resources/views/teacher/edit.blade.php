@@ -17,12 +17,32 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label>Image</label>
-                            <input type="file" name="image" class="form-control" placeholder="Image" value="{{$teacher->image}}" />
-                            @if ($errors->has('image'))
-                            <p class="text-danger">{{ $errors->first('image') }}</p>
-                            @endif
-                        </div>
+    <label>Image</label>
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" name="image" id="image" class="custom-file-input" accept="image/*">
+            <label class="custom-file-label" for="image">Choose file...</label>
+        </div>
+    </div>
+    @if ($errors->has('image'))
+        <p class="text-danger">{{ $errors->first('image') }}</p>
+    @endif
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var imageInput = document.getElementById("image");
+        var currentImage = "{{ $teacher->image }}";
+
+        // Check if currentImage is not empty and set the file input label
+        if (currentImage.trim() !== "") {
+            var fileName = currentImage.split('/').pop(); // Extract file name
+            var customFileLabel = imageInput.nextElementSibling;
+            customFileLabel.textContent = fileName;
+        }
+    });
+</script>
+
 
                         <div class="form-group">
                             <label>Name</label>

@@ -18,7 +18,7 @@
     <!-- --------------- HEADER --------------- -->
       <nav id="header">
         <div class="nav-logo">
-            <p class="nav-name">Minhaz</p>
+            <p class="nav-name">X SCHOOL</p>
             <span>_</span>
         </div>
         <div class="nav-menu" id="myNavMenu">
@@ -28,27 +28,54 @@
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a href="#about" class="nav-link ">About</a>
+                    <a href="{{ route('admission_f') }}" class="nav-link active-link ">Admission</a>
                     <div class="circle"></div>
                 </li>
 
                 <li class="nav_list">
-                    <a href="#know" class="nav-link ">Education</a>
+                    <a href="{{ route('teacher') }}" class="nav-link  active-link">Teachers</a>
                     <div class="circle"></div>
                 </li>
 
                 <li class="nav_list">
-                    <a href="#projects" class="nav-link ">Projects</a>
-                    <div class="circle"></div>
-                </li>
+                    <!-- <a href="{{ route('admin_login') }}" class="nav-link  active-link">Login</a> -->
+               
 
-                <li class="nav_list">
-                    <a href="#hobby" class="nav-link ">Hobby</a>
-                    <div class="circle"></div>
-                </li>
 
-                <li class="nav_list">
-                    <a href="#contact" class="nav-link ">Contact</a>
+ @php
+    $loggedIn = Auth::guard('students')->check();
+    $loggedIn2 = Auth::guard('admin')->check();
+@endphp
+
+@if ($loggedIn)
+    <a href="{{ route('logout') }}">Logout</a>
+
+@elseif ($loggedIn2)
+    <a href="{{ route('logout') }}">Logout</a>
+
+@else
+    <select id="dropdown">
+        <option value="">Login as</option>
+        <option value="{{ route('login') }}">Student</option>
+        <option value="{{ route('a_login') }}">Admin</option>
+    </select>
+    <!-- Button to trigger redirection -->
+    <button id="goButton" onclick="redirectToSelectedOption()">Login</button>
+
+    <script>
+        function redirectToSelectedOption() {
+            var dropdown = document.getElementById("dropdown");
+            var selectedOption = dropdown.options[dropdown.selectedIndex].value;
+            if (selectedOption) {
+                window.location.href = selectedOption;
+            }
+        }
+    </script>
+@endif
+
+
+
+
                     <div class="circle"></div>
                 </li>
             </ul>

@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
+
+
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect('');    
+   
+     }
+     
     public function teacher_view(){
         return view('teacher.register');
      }
@@ -82,7 +92,7 @@ class TeacherController extends Controller
     
     
     public function update(int $id, Request $request){
-         $request->validate([
+        $request->validate([
             'image' => 'nullable|mimes:png,jpg,jpeg,webp',
             'name' => 'required',
             'qualification' => 'required',
@@ -90,31 +100,33 @@ class TeacherController extends Controller
             'age' => 'required',
             'designation'  => 'required',
         ]);
-
+    
         $cat = Teacher::findOrFail($id)->firstOrFail();
-
+        $path = ''; // Define $path variable here
+        $filename = ''; // Define $filename variable here
+    
         if($request->has('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $path='uploads/';
-            $file->move($path,$filename);
-           if(File::exists($cat->image)){
-            File::delete($cat->image);
-           }
-         }
-
-           $cat->update([
-            'image' => $path.$filename,
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $path = 'uploads/';
+            $file->move($path, $filename);
+            if(File::exists($cat->image)){
+                File::delete($cat->image);
+            }
+        }
+    
+        $cat->update([
+            'image' => $path.$filename, // Ensure $path and $filename are defined
             'name' => $request->name,
             'qualification' => $request->qualification,
             'gender' => $request->gender,
             'age' => $request->age,
             'designation'  => $request->designation,
         ]);
-             
     
         return redirect(route('dashboard'))->with('success', 'Teacher updated successfully');
     }
+    
     
 }
