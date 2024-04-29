@@ -16,6 +16,14 @@ class TeacherController extends Controller
 
 
 
+
+    
+    public function dash(){
+        $teacher = Teacher::all();
+    
+        return view('dash.teacher', ['teacher' => $teacher]);
+    }
+
     public function logout(){
         Session::flush();
         Auth::logout();
@@ -28,7 +36,7 @@ class TeacherController extends Controller
      }
 
 
-     public function dash(){
+     public function dash_list(){
         $teacher = Teacher::all();
         return view('teacher.teacher_list', ['teacher' => $teacher]);
     }

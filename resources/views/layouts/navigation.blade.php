@@ -1,4 +1,4 @@
-@if (Route::has('login'))
+<!-- @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
                                     <a
@@ -29,4 +29,4 @@
                                     
                                 @endauth
                             </nav>
-                        @endif
+                        @endif -->

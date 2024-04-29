@@ -14,10 +14,21 @@
                             <p class="text-danger">{{ Session::get('error') }}</p>
                         @endif
 
-                        <form action="{{ route('register') }}" method="post" autocomplete="off">
+                        <form action="{{ route('register') }}" method="post" autocomplete="off"  enctype="multipart/form-data">
                             @csrf
                             @method('post')
                             <div class="form-group">
+
+
+                            <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" name="image" class="form-control" placeholder="Image" />
+                            @if ($errors->has('image'))
+                            <p class="text-danger">{{ $errors->first('image') }}</p>
+                            @endif
+                           </div>
+
+
                                 <label>Name</label>
                                 <input type="text" name="name" class="form-control" placeholder="name" />
                                 @if ($errors->has('name'))

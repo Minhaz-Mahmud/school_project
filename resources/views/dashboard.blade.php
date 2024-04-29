@@ -1,6 +1,14 @@
 Dashboard
+<br>
+<a href="{{ route('dashboard_t') }}"><button>Teacher Section</button></a>
+<a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
+<a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
+<a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
 
-  <a
+
+
+
+  <!-- <a
     href="{{ route('register') }}"
       class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
      >
@@ -20,6 +28,7 @@ Dashboard
   <table border="1">
        <tr>
           <th>ID</th>
+          <td>Image</td>
           <th>Name</th>
           <th>Gender</th>
           <th>DOB</th>
@@ -37,6 +46,7 @@ Dashboard
        @foreach($students as $student)
          <tr>
             <td>{{$student->id}}</td>
+            <td><img src="{{asset($student->image)}}" style="width:70px; height:70px" alt="img"></td>
             <td>{{$student->name}}</td>
             <td>{{$student->gender}}</td>
             <td>{{$student->date_of_birth}}</td>
@@ -112,6 +122,8 @@ Dashboard
           <th>ID</th>
           <th>Header</th>
           <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
           
        </tr>
 
@@ -157,6 +169,8 @@ Dashboard
           <th>Gender</th>
           <th>Age</th>
           <th>Designation</th>
+          <th>Edit</th>
+          <th>Delete</th>
           
        </tr>
 
@@ -181,7 +195,16 @@ Dashboard
 
        @endforeach
         </table>
+ -->
 
+        
+        <br><br>
+        <a
+    href="{{ route('add_marks') }}"
+      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+     >
+      Add  Studnts Marks
+  </a><br><br><br>
 
 
 

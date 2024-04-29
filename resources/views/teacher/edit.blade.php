@@ -27,9 +27,9 @@
     @if ($errors->has('image'))
         <p class="text-danger">{{ $errors->first('image') }}</p>
     @endif
-</div>
+     </div>
 
-<script>
+    <script>
     document.addEventListener("DOMContentLoaded", function() {
         var imageInput = document.getElementById("image");
         var currentImage = "{{ $teacher->image }}";
@@ -41,7 +41,7 @@
             customFileLabel.textContent = fileName;
         }
     });
-</script>
+    </script>
 
 
                         <div class="form-group">

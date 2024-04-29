@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\MarksController;
+
 use App\Http\Middleware\StudentAuthMiddleware;
 use App\Http\Middleware\AdminAuthMiddleware;
 
@@ -41,7 +43,7 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
     Route::post('/a_login',[AdminController::class,'login'])->name('a_login');
     
    
-    Route::get('/teacher',[TeacherController::class,'dash'])->name('teacher');
+    Route::get('/teacher',[TeacherController::class,'dash_list'])->name('teacher');
     Route::get('/teacher/{teacher}/profile',[TeacherController::class,'profile'])->name('teacher.profile');
 
     
@@ -62,8 +64,11 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
 
 
     Route::middleware(AdminAuthMiddleware::class)->group(function () {
-       
-        Route::get('/dash',[StudentsController::class,'dash'])->name('dashboard');
+        Route::get('/dash',[StudentsController::class,'dash_all'])->name('dashboard');
+        Route::get('/dash_s',[StudentsController::class,'dash'])->name('dashboard_s');
+        Route::get('/dash_a',[AdminController::class,'dash'])->name('dashboard_a');
+        Route::get('/dash_n',[NoticeController::class,'dash'])->name('dashboard_n');
+        Route::get('/dash_t',[TeacherController::class,'dash'])->name('dashboard_t');
 
 
         Route::get('/a_register',[AdminController::class,'register_view'])->name('a_register');
@@ -75,7 +80,7 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
        
        Route::delete('/student/{student}/destroy',[StudentsController::class,'destroy'])->name('student.destroy');
         Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
-        Route::put('/student/{student}/update',[StudentsController::class,'update'])->name('student.update');
+        Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
         
         Route::delete('/admin/{admin}/destroy',[AdminController::class,'destroy'])->name('admin.destroy');
         Route::get('/admin/{admin}/edit',[AdminController::class,'edit'])->name('admin.edit');
@@ -93,6 +98,16 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
         Route::delete('/teacher/{teacher}/destroy',[TeacherController::class,'destroy'])->name('teacher.destroy');
         Route::get('/teacher/{teacher}/edit',[TeacherController::class,'edit'])->name('teacher.edit');
         Route::put('/teacher/{id}/update',[TeacherController::class,'update'])->name('teacher.update');
+
+  
+        Route::get('/add_marks',[MarksController::class,'marks_view'])->name('add_marks');
+        Route::post('/add_marks',[MarksController::class,'add_marks'])->name('add_marks');
+        Route::delete('/marks/{marks}/destroy',[MarksController::class,'destroy'])->name('marks.destroy');
+        Route::get('/marks/{marks}/edit',[MarksController::class,'edit'])->name('marks.edit');
+        Route::put('/marks/{marks}/update',[MarksController::class,'update'])->name('marks.update');
+
+
+
     
     });
     

@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 
 class NoticeController extends Controller
 {
+
+
+
+
+    public function dash(){
+        $notice = Notice::all();
+    
+        return view('dash.notice', ['notice' => $notice]);
+    }
     public function notice_view(){
         return view('notice.register');
      }

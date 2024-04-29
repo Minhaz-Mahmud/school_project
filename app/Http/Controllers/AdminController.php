@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    public function dash(){
+        $admin = Admin::all();
+    
+        return view('dash.admin', ['admin' => $admin]);
+    }
+
     public function index(){
         return view('auth_admin.login');
      }
@@ -61,10 +68,10 @@ class AdminController extends Controller
 
 
    
-   public function dash(){
-    $admin=Admin::all();
-    return view ('dashboard',['admin'=>$admin]);
- }
+//    public function dash(){
+//     $admin=Admin::all();
+//     return view ('dashboard',['admin'=>$admin]);
+//  }
    
    
    
