@@ -48,6 +48,11 @@ return [
             'driver' => 'session',
             'provider' => 'admin',
         ],
+
+        'teacher_guard' => [
+            'driver' => 'session',
+            'provider' => 'teacher_provider',
+        ],
     ],
 
     /*
@@ -79,6 +84,11 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        'teacher_provider' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Teacher::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

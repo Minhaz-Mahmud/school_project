@@ -14,7 +14,36 @@ use Illuminate\Support\Facades\Auth;
 class TeacherController extends Controller
 {
 
+  
 
+
+    public function index(){
+        return view('teacher.login');
+     }
+
+    public function teacher_profile()
+    {
+        $user = Auth::guard('teacher_guard')->user();
+        return view('teacher.own_profile', ['user' => $user]);
+    }
+    
+
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+    
+        if (Auth::guard('teacher_guard')->attempt($request->only('email', 'password'))) {
+            $user = Auth::guard('teacher_guard')->user();
+            return redirect()->route('teacher_profile')->with('user', $user);
+        } else {
+            // Authentication failed
+            return redirect('t_login')->withError('Login details are not valid');
+        }
+    }
+    
+    
 
 
     
@@ -56,6 +85,8 @@ class TeacherController extends Controller
              'gender' => 'required',
              'age' => 'required',
              'designation'  => 'required',
+             'email' => 'required|email|unique:students,email',
+             'password' => 'required',
 
          ]);
 
@@ -74,6 +105,8 @@ class TeacherController extends Controller
              'gender' => $request->gender,
              'age' =>$request->age,
              'designation'  => $request->designation,
+             'email' => $request->email,
+             'password' => Hash::make($request->password)
 
          ]);
      

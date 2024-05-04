@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('age')->nullable();
             $table->string('designation')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

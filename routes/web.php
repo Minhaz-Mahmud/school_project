@@ -5,7 +5,7 @@ use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MarksController;
-
+use App\Http\Controllers\MeetController;
 use App\Http\Middleware\StudentAuthMiddleware;
 use App\Http\Middleware\AdminAuthMiddleware;
 
@@ -46,6 +46,16 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
     Route::get('/teacher',[TeacherController::class,'dash_list'])->name('teacher');
     Route::get('/teacher/{teacher}/profile',[TeacherController::class,'profile'])->name('teacher.profile');
 
+
+
+
+
+
+    Route::get('/teacher_profile',[TeacherController::class,'teacher_profile'])->name('teacher_profile');
+    Route::get('/t_login',[TeacherController::class,'index'])->name('t_login');
+    Route::post('/t_login',[TeacherController::class,'login'])->name('t_login');
+
+
     
 
     
@@ -69,6 +79,7 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
         Route::get('/dash_a',[AdminController::class,'dash'])->name('dashboard_a');
         Route::get('/dash_n',[NoticeController::class,'dash'])->name('dashboard_n');
         Route::get('/dash_t',[TeacherController::class,'dash'])->name('dashboard_t');
+        Route::get('/dash_m',[MeetController::class,'dash'])->name('dashboard_m');
 
 
         Route::get('/a_register',[AdminController::class,'register_view'])->name('a_register');
@@ -106,7 +117,12 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
         Route::get('/marks/{marks}/edit',[MarksController::class,'edit'])->name('marks.edit');
         Route::put('/marks/{marks}/update',[MarksController::class,'update'])->name('marks.update');
 
+        Route::get('/add_meet',[MeetController::class,'meet_view'])->name('add_meet');
+        Route::post('/add_meet',[MeetController::class,'add_meet'])->name('add_meet');
 
+        Route::get('/approve_meet/{id}', [MeetController::class,'approve_view'])->name('approve_meet');
+        Route::post('/approve_meet/{id}', [MeetController::class,'approve_meet'])->name('approve_meet');
+        Route::delete('/meet/{id}/destroy',[MeetController::class,'destroy'])->name('meet.destroy');
 
     
     });

@@ -4,6 +4,28 @@ Dashboard
 <a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
 <a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
 <a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
+<a href="{{ route('dashboard_m') }}"><button>Meeting Section</button></a>
+
+
+
+
+
+<br><br>
+        <a
+    href="{{ route('add_marks') }}"
+      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+     >
+      Add  Studnts Marks
+  </a><br><br><br>
+
+  <br><br>
+        <a
+    href="{{ route('add_meet') }}"
+      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+     >
+      Add  a meeting
+  </a><br><br><br>
+
 
 
 
@@ -198,13 +220,6 @@ Dashboard
  -->
 
         
-        <br><br>
-        <a
-    href="{{ route('add_marks') }}"
-      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-     >
-      Add  Studnts Marks
-  </a><br><br><br>
 
 
 
