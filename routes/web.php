@@ -33,6 +33,7 @@ Route::get('/logout',[StudentsController::class,'logout'])->name('logout');
 
 Route::get('/admission_f',[AdmissionController::class,'admission_view'])->name('admission_f');
 Route::post('/admission',[AdmissionController::class,'admission'])->name('admission');
+Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'destroy'])->name('admission.destroy');
 
 
 // Route::group(['middleware'=>'guest'],function(){
@@ -54,6 +55,19 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
     Route::get('/teacher_profile',[TeacherController::class,'teacher_profile'])->name('teacher_profile');
     Route::get('/t_login',[TeacherController::class,'index'])->name('t_login');
     Route::post('/t_login',[TeacherController::class,'login'])->name('t_login');
+
+
+    Route::post('/add_msg',[NoticeController::class,'add_msg'])->name('message');
+    Route::delete('/message/{message}/destroy',[NoticeController::class,'destroy2'])->name('notice.destroy2');
+
+
+
+
+
+    Route::get('/add_meet',[MeetController::class,'meet_view'])->name('add_meet');
+    Route::post('/add_meet',[MeetController::class,'add_meet'])->name('add_meet');
+
+
 
 
     
@@ -80,6 +94,13 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
         Route::get('/dash_n',[NoticeController::class,'dash'])->name('dashboard_n');
         Route::get('/dash_t',[TeacherController::class,'dash'])->name('dashboard_t');
         Route::get('/dash_m',[MeetController::class,'dash'])->name('dashboard_m');
+
+        
+        Route::get('/dash_admission',[AdmissionController::class,'dash'])->name('dashboard_ad');
+        Route::get('/dash_message',[NoticeController::class,'dash_message'])->name('dashboard_me');
+       
+
+
 
 
         Route::get('/a_register',[AdminController::class,'register_view'])->name('a_register');
@@ -115,14 +136,14 @@ Route::post('/admission',[AdmissionController::class,'admission'])->name('admiss
         Route::post('/add_marks',[MarksController::class,'add_marks'])->name('add_marks');
         Route::delete('/marks/{marks}/destroy',[MarksController::class,'destroy'])->name('marks.destroy');
         Route::get('/marks/{marks}/edit',[MarksController::class,'edit'])->name('marks.edit');
-        Route::put('/marks/{marks}/update',[MarksController::class,'update'])->name('marks.update');
+        Route::put('/marks/{id}/update',[MarksController::class,'update'])->name('marks.update');
 
-        Route::get('/add_meet',[MeetController::class,'meet_view'])->name('add_meet');
-        Route::post('/add_meet',[MeetController::class,'add_meet'])->name('add_meet');
+   
 
         Route::get('/approve_meet/{id}', [MeetController::class,'approve_view'])->name('approve_meet');
         Route::post('/approve_meet/{id}', [MeetController::class,'approve_meet'])->name('approve_meet');
-        Route::delete('/meet/{id}/destroy',[MeetController::class,'destroy'])->name('meet.destroy');
+        Route::delete('/meet/{meet}/destroy',[MeetController::class,'destroy'])->name('meet.destroy');
+        Route::delete('/meet/{meet}/destroy2',[MeetController::class,'destroy2'])->name('meet.destroy2');
 
     
     });

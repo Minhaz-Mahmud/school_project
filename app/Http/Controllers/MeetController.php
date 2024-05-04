@@ -10,10 +10,11 @@ class MeetController extends Controller
      
     public function dash(){
         $meet = Mrequest::all();
-    
-        return view('dash.meet', ['meet' => $meet]);
+        $a = Schedule::all();
+        return view('dash.meet', compact('meet', 'a'));
     }
 
+  
 
     public function meet_view(){
         return view('meet.add_meet');
@@ -90,8 +91,14 @@ class MeetController extends Controller
 
 
 
-     public function destroy(Mrequest $id){
-        $id->delete();
-        return redirect(route('dashboard'))->with('success','Meet deleted successfully');
+     public function destroy(Mrequest $meet){
+        $meet->delete();
+        return redirect(route('dashboard_m'))->with('success','Meet deleted successfully');
+    }
+
+   
+    public function destroy2(Schedule $meet){
+        $meet->delete();
+        return redirect(route('dashboard_m'))->with('success','Meet deleted successfully');
     }
 }

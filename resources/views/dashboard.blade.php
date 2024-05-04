@@ -1,30 +1,106 @@
-Dashboard
-<br>
-<a href="{{ route('dashboard_t') }}"><button>Teacher Section</button></a>
-<a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
-<a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
-<a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
-<a href="{{ route('dashboard_m') }}"><button>Meeting Section</button></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard {
+            text-align: center;
+        }
+
+        .dashboard h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .button-group a {
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button-group button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Dashboard</h1>
+        <div class="buttons-container">
+            <div class="button-group">
+                <a href="{{ route('dashboard_t') }}"><button>Teacher Section</button></a>
+                <a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
+            </div>
+            <div class="button-group">
+                <a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
+                <a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
+            </div>
+            <div class="button-group">
+                <a href="{{ route('dashboard_m') }}"><button>Meeting Section</button></a>
+                <a href="{{ route('dashboard_ad') }}"><button>Admission Section</button></a>
+            </div>
+            <div class="button-group">
+                <a href="{{ route('dashboard_me') }}"><button>Message Section</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 
 
 
 
-<br><br>
-        <a
-    href="{{ route('add_marks') }}"
-      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-     >
-      Add  Studnts Marks
-  </a><br><br><br>
 
-  <br><br>
+
+
+  <!-- <br><br>
         <a
     href="{{ route('add_meet') }}"
       class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
      >
       Add  a meeting
-  </a><br><br><br>
+  </a><br><br><br> -->
 
 
 

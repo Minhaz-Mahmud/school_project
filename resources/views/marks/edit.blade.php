@@ -12,9 +12,9 @@
                     <p class="text-danger">{{ Session::get('error') }}</p>
                     @endif
 
-                    <form action="{{ route('marks.update',['marks'=>$marks]) }}" method="post">
+                    <form action="{{ route('marks.update',['id'=>$marks->id]) }}" method="post">
                         @csrf
-                        @method('post')
+                        @method('PUT')
                         <div class="form-group">
                             <label>ID</label>
                             <input type="text" name="id" class="form-control" placeholder="ID"  value="{{$marks->id}}"/>
@@ -25,7 +25,7 @@
 
                         <div class="form-group">
                             <label>Exam</label>
-                            <input type="text" name="exam" class="form-control" placeholder="Exam" value="{{$marks->name}}" />
+                            <input type="text" name="exam" class="form-control" placeholder="Exam" value="{{$marks->exam}}" />
                             @if ($errors->has('exam'))
                             <p class="text-danger">{{ $errors->first('exam') }}</p>
                             @endif

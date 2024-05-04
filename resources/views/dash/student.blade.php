@@ -11,7 +11,7 @@
             {{session('success')}}
           </div>
         @endif
-    </div><br><br>
+    </div><br><br><br><br><br>
 
 
       
@@ -60,3 +60,50 @@
         </table>
 
 <br><br>
+
+
+
+<br><br>
+        <a
+    href="{{ route('add_marks') }}"
+      class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+     >
+      Add  Studnts Marks
+  </a>
+
+
+  </a><br><br><br>
+
+
+<table border="1">
+     <tr>
+        <th>ID</th>
+        <th>Exam Name</th>
+        <th>Bangla</th>
+        <th>English</th>
+        <th>Math</th>
+        <th>Science</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        
+     </tr>
+
+
+     @foreach($a as $a)
+       <tr>
+          <td>{{$a->id}}</td>
+          <td>{{$a->exam}}</td>
+          <td>{{$a->bangla}}</td>
+          <td>{{$a->english}}</td>
+          <td>{{$a->math}}</td>
+          <td>{{$a->science}}</td>
+          <td><a href="{{route('marks.edit',['marks'=>$a])}}">Edit</a></td>
+          <td><form  method="post" action="{{route('marks.destroy',['marks'=>$a])}}">
+                  @csrf
+                  @method('delete')
+                  <input type="submit" value="Delete">
+              </form></td>
+       </tr>
+
+     @endforeach
+      </table>

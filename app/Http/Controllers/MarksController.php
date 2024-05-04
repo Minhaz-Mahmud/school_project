@@ -43,7 +43,7 @@ class MarksController extends Controller
 
      public function destroy(Marks $marks){
         $marks->delete();
-        return redirect(route('dashboard'))->with('success','Admin deleted successfully');
+        return redirect(route('dashboard_s'))->with('success','Admin deleted successfully');
     }
 
     
@@ -53,7 +53,8 @@ class MarksController extends Controller
     }
     
     
-    public function update(Marks $marks,Request $request){
+    public function update($id,Request $request){
+        $marks = Marks::findOrFail($id);
         $data=$request->validate([
             'id' => 'required',
             'exam' => 'required',
@@ -64,6 +65,6 @@ class MarksController extends Controller
            ]);   
            
            $marks->update($data);
-           return redirect(route('dashboard'))->with('success','Student updated successfully');
+           return redirect(route('dashboard_s'))->with('success','Student updated successfully');
     }
 }

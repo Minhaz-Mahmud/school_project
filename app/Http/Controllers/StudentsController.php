@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Admin;
 use App\Models\Notice;
+use App\Models\Marks;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\Session;
@@ -37,10 +38,17 @@ class StudentsController extends Controller
 
      public function dash(){
         $students = Student::all();
+        $a = Marks::all();
     
-        return view('dash.student', ['students' => $students]);
+        return view('dash.student', compact('students', 'a'));
     }
     
+
+    // public function dash_marks(){
+    //     $a = Marks::all();
+    
+    //     return view('dash.student', ['a' => $a]);
+    // }
 
 
 

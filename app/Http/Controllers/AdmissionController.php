@@ -5,7 +5,17 @@ use App\Models\Admission;
 use Illuminate\Http\Request;
 
 class AdmissionController extends Controller
-{    public function admission_view(){
+{   
+    
+    public function dash(){
+        $a = Admission::all();
+    
+        return view('dash.admission', ['a' => $a]);
+    }
+    
+    
+    
+    public function admission_view(){
     return view('admission');
  }
 
@@ -36,4 +46,11 @@ class AdmissionController extends Controller
  
     //  return redirect('home')->withError('Registration failed.')
  }
+
+ public function destroy(Admission $admission){
+    $admission->delete();
+    return redirect(route('dashboard'))->with('success','Admission deleted successfully');
+}
+
+
 }

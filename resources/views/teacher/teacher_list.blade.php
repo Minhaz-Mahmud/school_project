@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher List</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .consult-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF2D20;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .consult-btn:hover {
+            background-color: #E30000;
+            color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -27,6 +44,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="container text-center">
+        <a href="{{ route('add_meet') }}" class="consult-btn">Consult With a Teacher</a>
     </div>
 </body>
 </html>

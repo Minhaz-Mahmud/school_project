@@ -37,6 +37,8 @@
                     <div class="circle"></div>
                 </li>
 
+                
+
                 <li class="nav_list">
                     <!-- <a href="{{ route('admin_login') }}" class="nav-link  active-link">Login</a> -->
                
@@ -45,6 +47,8 @@
  @php
     $loggedIn = Auth::guard('students')->check();
     $loggedIn2 = Auth::guard('admin')->check();
+    $loggedIn3 = Auth::guard('teacher_guard')->check();
+
 @endphp
 
 @if ($loggedIn)
@@ -52,12 +56,15 @@
 
 @elseif ($loggedIn2)
     <a href="{{ route('logout') }}">Logout</a>
+@elseif ($loggedIn3)
+    <a href="{{ route('logout') }}">Logout</a>
 
 @else
     <select id="dropdown">
         <option value="">Login as</option>
         <option value="{{ route('login') }}">Student</option>
         <option value="{{ route('a_login') }}">Admin</option>
+        <option value="{{ route('t_login') }}">Teacher</option>
     </select>
     <!-- Button to trigger redirection -->
     <button id="goButton" onclick="redirectToSelectedOption()">Login</button>
@@ -251,7 +258,9 @@
                   </div>
                </div>
 
-            <form action="contact.php" method="post" enctype="multipart/form-data">
+            <form action="{{ route('message') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
                <div class="col">
                   <div class="form-control">
                       <div class="form-inputs">
