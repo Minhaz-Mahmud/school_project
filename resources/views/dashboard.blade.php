@@ -36,10 +36,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #007bff;
+            background-color: #fff; /* Changed background color to green */
             border-radius: 10px;
             padding: 20px;
             margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
         }
 
         .button-group a {
@@ -49,8 +50,8 @@
 
         .button-group button {
             padding: 10px 20px;
-            background-color: #fff;
-            color: #007bff;
+            background-color:  #007bff;
+            color:#fff ; /* Changed button text color to green */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -58,12 +59,14 @@
         }
 
         .button-group button:hover {
-            background-color: #0056b3;
+            background-color:orangered; /* Darker green on hover */
             color: #fff;
         }
     </style>
 </head>
 <body>
+
+@include('layout.navigation')
     <div class="dashboard">
         <h1>Dashboard</h1>
         <div class="buttons-container">
@@ -86,6 +89,7 @@
     </div>
 </body>
 </html>
+
 
 
 

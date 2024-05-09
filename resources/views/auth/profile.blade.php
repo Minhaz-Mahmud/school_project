@@ -14,7 +14,7 @@
 
         .container {
             max-width: 800px;
-            margin: 50px auto;
+            margin: 70px auto;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
@@ -63,6 +63,8 @@
     </style>
 </head>
 <body>
+@include('layout.navigation')
+   <h1>Student Profile</h1>
     <div class="container">
         <img src="{{ asset($user->image) }}" class="profile-image" alt="Profile Image">
         <h1>{{ $user->name }}</h1>

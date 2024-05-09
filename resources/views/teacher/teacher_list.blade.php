@@ -4,12 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher List</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
     <style>
+        /* Custom CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 150px auto 10px; /* Adjusted margin */
+            padding: 0 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
         .consult-btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #FF2D20;
+            background-color: green;
             color: #FFFFFF;
             border: none;
             border-radius: 5px;
@@ -19,14 +63,14 @@
 
         .consult-btn:hover {
             background-color: #E30000;
-            color: #FFFFFF;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="mb-4">Teacher List</h1>
-        <table class="table table-bordered">
+    @include('layout.navigation')
+    <div class="container">
+        <h1>Teacher List</h1>
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -39,7 +83,7 @@
                 <tr>
                     <td>{{ $teacher->id }}</td>
                     <td>{{ $teacher->name }}</td>
-                    <td><a href="{{ route('teacher.profile', ['teacher' => $teacher->id]) }}" class="btn btn-primary">Details</a></td>
+                    <td><a href="{{ route('teacher.profile', ['teacher' => $teacher->id]) }}" class="consult-btn">Details</a></td>
                 </tr>
                 @endforeach
             </tbody>
