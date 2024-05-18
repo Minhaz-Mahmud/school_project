@@ -63,6 +63,14 @@
                             @endif
                         </div>
 
+                        <div class="form-group">
+                            <label>Payable Dew</label>
+                            <input type="text" name="dew" class="form-control" placeholder="Dew"  value="{{$marks->dew}}" />
+                            @if ($errors->has('dew'))
+                            <p class="text-danger">{{ $errors->first('dew') }}</p>
+                            @endif
+                        </div>
+
                         <div class="col-12 text-center">
                             <input type="submit" class="btn btn-primary" value="Add Marks" />
                         </div>

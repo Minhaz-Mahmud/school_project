@@ -40,7 +40,7 @@ class AdmissionController extends Controller
  
      if ($notice) {
         
-             return redirect('home');
+             return redirect('');
         
      }
  

@@ -91,7 +91,7 @@ class StudentsController extends Controller
          'image' => 'required|mimes:png,jpg,jpeg,webp',
            'name' => 'required',
            'gender' => 'required',
-           'birth' => 'required', // Adjust this field name if necessary
+           'birth' => 'required', 
            'roll' => 'required',
            'blood' => 'required',
            'email' => 'required|email|unique:students,email',
@@ -99,7 +99,7 @@ class StudentsController extends Controller
            'section' => 'required',
            'phone' => 'required',
            'password' => 'required',
-           'religion' => 'required', // Add validation rule for religion field
+           'religion' => 'required', 
        ]);
            
        if($request->has('image')){
@@ -114,14 +114,14 @@ class StudentsController extends Controller
            'image' => $path.$filename,
            'name' => $request->name,
            'gender' => $request->gender,
-           'date_of_birth' => $request->birth, // Adjust this field name if necessary
+           'date_of_birth' => $request->birth, 
            'roll' => $request->roll,
-           'blood_group' => $request->blood, // Adjust this field name if necessary
-           'religion' => $request->religion, // Add religion field
+           'blood_group' => $request->blood, 
+           'religion' => $request->religion, 
            'email' => $request->email,
            'class' => $request->class,
            'section' => $request->section,
-           'phone_number' => $request->phone, // Adjust this field name if necessary
+           'phone_number' => $request->phone, 
            'password' => Hash::make($request->password)
        ]);
    
@@ -137,54 +137,62 @@ class StudentsController extends Controller
    public function edit(Student $student){
     return view('auth.edit',['student'=>$student]);
 }
-   public function update(int $id,Request $request){
-    $data=$request->validate([
-          'image' => 'nullable|mimes:png,jpg,jpeg,webp',
-           'name' => 'required',
-           'gender' => 'required',
-           'birth' => 'required', // Adjust this field name if necessary
-           'roll' => 'required',
-           'blood' => 'required',
-           'email' => 'required|email',
-           'class' => 'required',
-           'section' => 'required',
-           'phone' => 'required',
-           'password' => 'required',
-           'religion' => 'required',
-       ]);   
-       
-       $cat = Student::findOrFail($id)->firstOrFail();
-       $path = ''; // Define $path variable here
-       $filename = ''; // Define $filename variable here
+public function update(int $id, Request $request)
+{
+    $data = $request->validate([
+        'image' => 'nullable|mimes:png,jpg,jpeg,webp',
+        'name' => 'required',
+        'gender' => 'required',
+        'birth' => 'required', 
+        'roll' => 'required',
+        'blood' => 'required',
+        'email' => 'required|email',
+        'class' => 'required',
+        'section' => 'required',
+        'phone' => 'required',
+        'password' => 'nullable',
+        'religion' => 'required',
+    ]);   
 
-       if($request->has('image')){
+    $student = Student::findOrFail($id);
+
+    $path = ''; 
+    $filename = ''; 
+    if ($request->has('image')) {
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
         $filename = time().'.'.$extension;
         $path = 'uploads/';
         $file->move($path, $filename);
-        if(File::exists($cat->image)){
-            File::delete($cat->image);
+        if (File::exists($student->image)) {
+            File::delete($student->image);
         }
     }
 
-    $cat->update([
-        'image' => $path.$filename, // Ensure $path and $filename are defined
+    $updatedData = [
+        'image' => $path . $filename, 
         'name' => $request->name,
         'gender' => $request->gender,
-        'date_of_birth' => $request->birth, // Adjust this field name if necessary
+        'date_of_birth' => $request->birth, 
         'roll' => $request->roll,
-        'blood_group' => $request->blood, // Adjust this field name if necessary
-        'religion' => $request->religion, // Add religion field
+        'blood_group' => $request->blood, 
+        'religion' => $request->religion,
         'email' => $request->email,
         'class' => $request->class,
         'section' => $request->section,
-        'phone_number' => $request->phone, // Adjust this field name if necessary
-        'password' => Hash::make($request->password)
-    ]);
+        'phone_number' => $request->phone,
+    ];
 
-    return redirect(route('dashboard'))->with('success', 'Student updated successfully');
+    // Update password only if provided by the user
+    if ($request->filled('password')) {
+        $updatedData['password'] = Hash::make($request->password);
+    }
+
+    $student->update($updatedData);
+
+    return redirect(route('profile'))->with('success', 'Student Profile updated successfully');
 }
+
    
    
    public function home(){

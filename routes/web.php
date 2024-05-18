@@ -8,6 +8,7 @@ use App\Http\Controllers\MarksController;
 use App\Http\Controllers\MeetController;
 use App\Http\Middleware\StudentAuthMiddleware;
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Controllers\SslCommerzPaymentController;
 
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::get('/welcome', function () {
 
 
 Route::get('/',[StudentsController::class,'home'])->name('home');
+
 Route::get('/logout',[StudentsController::class,'logout'])->name('logout');
 
 Route::get('/admission_f',[AdmissionController::class,'admission_view'])->name('admission_f');
@@ -46,7 +48,8 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
    
     Route::get('/teacher',[TeacherController::class,'dash_list'])->name('teacher');
     Route::get('/teacher/{teacher}/profile',[TeacherController::class,'profile'])->name('teacher.profile');
-
+    Route::get('/teacher/{teacher}/edit',[TeacherController::class,'edit'])->name('teacher.edit');
+    Route::put('/teacher/{id}/update',[TeacherController::class,'update'])->name('teacher.update');
 
 
 
@@ -79,6 +82,9 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
 
     Route::middleware(StudentAuthMiddleware::class)->group(function () {
         Route::get('/profile',[StudentsController::class,'profile'])->name('profile');
+
+        Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
+        Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
     });
 
 
@@ -111,8 +117,7 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
         Route::post('/register',[StudentsController::class,'register'])->name('register');
        
        Route::delete('/student/{student}/destroy',[StudentsController::class,'destroy'])->name('student.destroy');
-        Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
-        Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
+       
         
         Route::delete('/admin/{admin}/destroy',[AdminController::class,'destroy'])->name('admin.destroy');
         Route::get('/admin/{admin}/edit',[AdminController::class,'edit'])->name('admin.edit');
@@ -128,8 +133,7 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
         Route::get('/add_teacher',[TeacherController::class,'teacher_view'])->name('add_teacher');
         Route::post('/add_teacher',[TeacherController::class,'add_teacher'])->name('add_teacher');
         Route::delete('/teacher/{teacher}/destroy',[TeacherController::class,'destroy'])->name('teacher.destroy');
-        Route::get('/teacher/{teacher}/edit',[TeacherController::class,'edit'])->name('teacher.edit');
-        Route::put('/teacher/{id}/update',[TeacherController::class,'update'])->name('teacher.update');
+       
 
   
         Route::get('/add_marks',[MarksController::class,'marks_view'])->name('add_marks');
@@ -147,4 +151,25 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
 
     
     });
+
+
+    // SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2/{id}', [SslCommerzPaymentController::class, 'exampleHostedCheckout'])->name('checkout');
+// Route::get('/index2/{id}', [SslCommerzPaymentController::class, 'index'])->name('index2');
+
+Route::post('/pay/{id}', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
+use App\Http\Controllers\YourController;
+
+Route::post('/update-and-checkout/{id}', [MarksController::class, 'updateAndCheckout'])->name('updateAndCheckout');
+
     

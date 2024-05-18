@@ -1,3 +1,9 @@
+
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
 @extends('layouts.app')
 @section('content')
 

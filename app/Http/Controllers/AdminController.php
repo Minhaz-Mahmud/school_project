@@ -92,15 +92,27 @@ class AdminController extends Controller
 }
 
 
-public function update(Admin $admin,Request $request){
-    $data=$request->validate([
-           'username' => 'required',
-           'email' => 'required|email',
-           'password' => 'required',
-       ]);   
-       
-       $admin->update($data);
-       return redirect(route('dashboard'))->with('success','Student updated successfully');
+public function update(Admin $admin, Request $request)
+{
+    $data = $request->validate([
+        'username' => 'required',
+        'email' => 'required|email',
+        'password' => 'nullable', 
+    ]);   
+
+    $updatedData = [
+        'username' => $request->username,
+        'email' => $request->email,
+    ];
+
+   
+    if ($request->filled('password')) {
+        $updatedData['password'] = Hash::make($request->password);
+    }
+
+    $admin->update($updatedData);
+
+    return redirect(route('dashboard'))->with('success', 'Admin updated successfully');
 }
   
   public function destroy(Admin $admin){

@@ -83,6 +83,20 @@
                             <p class="text-danger">{{ $errors->first('designation') }}</p>
                             @endif
                         </div>
+                        <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email"  value="{{$teacher->email}}" autocomplete="off"/>
+                                @if ($errors->has('email'))
+                                    <p class="text-danger">{{ $errors->first('email') }}</p>
+                                @endif
+                            </div>
+                        <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" />
+                                @if ($errors->has('password'))
+                                    <p class="text-danger">{{ $errors->first('password') }}</p>
+                                @endif
+                            </div>
 
                         <div class="col-12 text-center">
                             <input type="submit" class="btn btn-primary" value="Register" />

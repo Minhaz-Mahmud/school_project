@@ -1,3 +1,10 @@
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,6 +67,51 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
+        .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; 
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: #fff; 
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.dew {
+    text-align: center;
+    margin: 20px;
+}
+
+.dew-details {
+    margin-bottom: 10px;
+}
+
+.pay-button-container {
+    text-align: center;
+}
+
+.pay-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff0000; /* Red color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pay-button:hover {
+    background-color: #cc0000; /* Darker red for hover effect */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -101,7 +153,26 @@
             <p><strong>Math:</strong> {{ $marks->math }}</p>
             <p><strong>Science:</strong> {{ $marks->science }}</p>
         </div>
+
+        <div class="dew">
+    <h5>Dews</h5>
+    <div class="dew-details">
+        <p><strong>Payable Dews: </strong>{{ $marks->dew }}  <strong>TK</strong> </p>
+        <form id="payForm" action="{{ route('updateAndCheckout',['id'=>$marks]) }}" method="POST">
+            @csrf
+            <input type="hidden" name="dewId" value="{{ $marks->id }}">
+            <button type="submit" class="pay-button">Pay</button>
+        </form>
+    </div>
+</div>
+
+
+        
         @endif
     </div>
+    <div class="button-container">
+    <a href="{{ route('student.edit', ['student' => $user]) }}" class="button">Edit Profile</a>
+</div>
+
 </body>
 </html>

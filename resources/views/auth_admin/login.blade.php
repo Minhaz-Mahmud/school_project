@@ -8,12 +8,18 @@
   <style>
     /* Custom Styling */
     body {
+      /* font-family: Arial, sans-serif;
+      background-color: #f8f9fa; */
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      /* Set background image */
+      background-image: url('/image/login6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
     
     .container {
-      margin-top: 50px;
+      margin-top: 130px;
     }
 
     .card {
@@ -22,6 +28,8 @@
     }
 
     .card-body {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
       padding: 30px;
     }
 

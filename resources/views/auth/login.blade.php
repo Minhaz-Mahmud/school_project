@@ -8,8 +8,14 @@
   <style>
     /* Custom Styling */
     body {
+      /* font-family: Arial, sans-serif;
+      background-color: #f8f9fa; */
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      /* Set background image */
+      background-image: url('/image/login5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
     
     .container {
@@ -23,6 +29,8 @@
 
     .card-body {
       padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+
     }
 
     h1 {

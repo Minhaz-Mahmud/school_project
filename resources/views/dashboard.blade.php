@@ -1,3 +1,10 @@
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,12 +69,43 @@
             background-color:orangered; /* Darker green on hover */
             color: #fff;
         }
+
+
+        /* ----- FOOTER BOX ----- */
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 30px;
+    background: black;
+    color: white;
+    padding-block: 40px 60px;
+}
+.top-footer p{
+    font-size: 25px;
+    font-weight: 600;
+}
+.middle-footer .footer-menu{
+    display: flex;
+}
+
+.footer-social-icons{
+    display: flex;
+   
+    gap: 30px;   
+}
+.bottom-footer{
+    font-size: 14px;
+    margin-top: 10px;
+}
     </style>
 </head>
 <body>
-
+          
 @include('layout.navigation')
     <div class="dashboard">
+        <br><br><br><br><br><br>
         <h1>Dashboard</h1>
         <div class="buttons-container">
             <div class="button-group">
@@ -87,6 +125,26 @@
             </div>
         </div>
     </div>
+    <br><br><br><br><br><br>
+
+                   <!-- --------------- FOOTER --------------- -->
+                   <footer>
+          <div class="top-footer">
+              <p>Abc School</p>
+          </div>
+          <div class="middle-footer">
+            
+          </div>
+          <div class="footer-social-icons">
+              <div class="icon"><i class="uil uil-facebook"></i></div>
+              <div class="icon"><i class="uil uil-github-alt"></i></div>
+          </div>
+          <div class="bottom-footer">
+              <p>A <a href="#home" style="text-decoration: none;"> Minhaz  Mahmud </a> - development.</p>
+          </div>
+       
+
+      </footer>
 </body>
 </html>
 

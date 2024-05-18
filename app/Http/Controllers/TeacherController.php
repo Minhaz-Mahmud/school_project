@@ -85,7 +85,7 @@ class TeacherController extends Controller
              'gender' => 'required',
              'age' => 'required',
              'designation'  => 'required',
-             'email' => 'required|email|unique:students,email',
+             'email' => 'required|email|unique:teacher,email',
              'password' => 'required',
 
          ]);
@@ -112,11 +112,11 @@ class TeacherController extends Controller
      
          if ($teacher) {
             
-                 return redirect('dash');
+            return redirect(route('dashboard'))->with('success','Teacher added successfully');
             
          }
      
-         return redirect('add')->withError('Registration failed.');
+         return redirect('add_teacher')->withError('Registration failed.');
      }
 
 
@@ -132,7 +132,8 @@ class TeacherController extends Controller
     }
     
     
-    public function update(int $id, Request $request){
+    public function update(int $id, Request $request)
+    {
         $request->validate([
             'image' => 'nullable|mimes:png,jpg,jpeg,webp',
             'name' => 'required',
@@ -140,34 +141,46 @@ class TeacherController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'designation'  => 'required',
+            'email' => 'required',
+            'password' => 'nullable', 
         ]);
     
-        $cat = Teacher::findOrFail($id)->firstOrFail();
-        $path = ''; // Define $path variable here
-        $filename = ''; // Define $filename variable here
+        $teacher = Teacher::findOrFail($id);
     
-        if($request->has('image')){
+        $path = '';
+        $filename = '';
+    
+        if ($request->has('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
+            $filename = time() . '.' . $extension;
             $path = 'uploads/';
             $file->move($path, $filename);
-            if(File::exists($cat->image)){
-                File::delete($cat->image);
+            if (File::exists($teacher->image)) {
+                File::delete($teacher->image);
             }
         }
     
-        $cat->update([
-            'image' => $path.$filename, // Ensure $path and $filename are defined
+        $updatedData = [
+            'image' => $path . $filename, 
             'name' => $request->name,
             'qualification' => $request->qualification,
             'gender' => $request->gender,
             'age' => $request->age,
             'designation'  => $request->designation,
-        ]);
+            'email' => $request->email,
+        ];
     
-        return redirect(route('dashboard'))->with('success', 'Teacher updated successfully');
+       
+        if ($request->filled('password')) {
+            $updatedData['password'] = Hash::make($request->password);
+        }
+    
+        $teacher->update($updatedData);
+    
+        return redirect(route('teacher_profile'))->with('success', 'Teacher updated successfully');
     }
+    
     
     
 }

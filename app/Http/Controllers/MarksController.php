@@ -20,6 +20,7 @@ class MarksController extends Controller
             'english' => 'required',
             'math' => 'required',
             'science' => 'required',
+            'dew' => 'required',
          ]);
      
          $marks = Marks::create([
@@ -29,6 +30,8 @@ class MarksController extends Controller
             'english' => $request->english,
             'math' => $request->math,
             'science' => $request->science,
+            'dew' => $request->dew,
+
          ]);
      
          if ($marks) {
@@ -62,9 +65,24 @@ class MarksController extends Controller
             'english' => 'required',
             'math' => 'required',
             'science' => 'required',
+            'dew' => 'required',
            ]);   
            
            $marks->update($data);
            return redirect(route('dashboard_s'))->with('success','Student updated successfully');
     }
+
+
+
+    public function updateAndCheckout($id)
+    {
+         $mark = Marks::find($id);
+        if ($mark) {
+            $mark->dew = 0;         
+            $mark->save();
+        }
+        return redirect()->route('checkout',['id'=>$mark]);
+    }
 }
+
+

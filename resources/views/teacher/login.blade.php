@@ -9,8 +9,14 @@
     /* Custom Styling */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      /* Set background image */
+      background-image: url('/image/login.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+
+    
     
     .container {
       margin-top: 50px;
@@ -22,7 +28,10 @@
     }
 
     .card-body {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
       padding: 30px;
+      background-color: rgba(255, 255, 255, 0.8); /* Add opacity to card background */
     }
 
     h1 {

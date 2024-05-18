@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="col-12 text-center">
-                            <input type="Add" class="btn btn-primary" value="Add Marks" />
+                            <input type="submit" class="btn btn-primary" value="Add" />
                         </div>
                     </form>
                 </div>

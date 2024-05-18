@@ -1,3 +1,10 @@
+
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,6 +67,22 @@
             margin-bottom: 20px;
             text-align: center;
         }
+        .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; 
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff; 
+    text-decoration: none;
+    border-radius: 5px;
+}
+
     </style>
 </head>
 <body>
@@ -92,5 +115,8 @@
             @endif
         </div>
     </div>
+    <div class="button-container">
+    <a href="{{route('teacher.edit',['teacher'=>$user])}}" class="button">Edit Profile</a>
+</div>
 </body>
 </html>

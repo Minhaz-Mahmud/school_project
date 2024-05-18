@@ -1,3 +1,8 @@
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
 
 
 <!DOCTYPE html>
@@ -23,7 +28,7 @@
 
 <nav id="header">
     <div class="nav-logo">
-        <p class="nav-name">X SCHOOL</p>
+        <p class="nav-name">ABC SCHOOL</p>
         <span>_</span>
     </div>
     <div class="nav-menu" id="myNavMenu">
@@ -153,7 +158,7 @@
 
 
 
- <div class="slideshow-container">
+ <div class="sllideshow-container">
 
  <h1 class="gallery-title">Gallery</h1>
  
@@ -161,25 +166,25 @@
     <div class="mySlides fade">
         <div class="numbertext">1 / 4</div>
         <img src="{{ asset('image/image1.jpg') }}" style="width: 100%" alt="Description">
-        <div class="text">Caption Text</div>
+        <div class="text">Campus</div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">2 / 4</div>
         <img src="{{ asset('image/image2.jpg') }}" style="width: 100%" alt="Description">
-        <div class="text">Caption Two</div>
+        <div class="text">Class</div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">3 / 4</div>
         <img src="{{ asset('image/image3.jpg') }}" style="width: 100%" alt="Description">
-        <div class="text">Caption Three</div>
+        <div class="text">Clasroom</div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">4 / 4</div>
         <img src="{{ asset('image/image4.jpg') }}" style="width: 100%" alt="Description">
-        <div class="text">Caption Four</div>
+        <div class="text">Playground</div>
     </div>
 
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -232,30 +237,89 @@
 
 
  <!-- -------------- ABOUT BOX ---------------- -->
+ <br><br>
  <section class="section" id="about">
           <div class="top-header">
-            <h1>About Me</h1>
+            <!-- <h1>About Me</h1> -->
           </div>
                 <div class="about-info">
-                    <h3>My introduction</h3>
-                    <p>
-                        Hi, I'm Minhaz Mahmud, a Computer Science and Engineering student at 
-                        Khulna University of Engineering and Technology.
-                         I'm passionate about programming and always eager to learn new things.
-                          As a developer in the making,
-                          I explore various aspects of software development,
-                           with a particular interest in mobile app development.
-                         I enjoy tackling challenges and constantly improving my skills.
-                          Let's connect and share our programming journey!
-                    </p>
-                    <div class="about-btn">
-                </div>
+                    <h3>OUR HISTORY</h3>
+                    <div class="school-history">
+    <p>ABC School: Nurturing Minds, Building Futures in Khulna, Bangladesh</p>
+    <p>Established in 1935 by the visionary educator Professor Abdullah Rahman, ABC School has been a cornerstone of educational excellence in Khulna, Bangladesh, for nearly nine decades.</p>
+
+    <p>Professor Rahman founded ABC School with a mission to revolutionize education by providing students with more than just academic knowledge. He envisioned a school that would foster creativity, critical thinking, and compassion among its students, preparing them to navigate the complexities of the world with confidence and integrity.</p>
+
+    <p>From its humble beginnings in a small building in the heart of Khulna, ABC School has grown into a sprawling institution renowned for its progressive teaching methodologies and unwavering commitment to holistic development. Over the years, the school has expanded its facilities and curriculum offerings, integrating modern technology and innovative pedagogy to provide students with a comprehensive learning experience.</p>
+
+    <p>Despite its growth and evolution, ABC School has remained true to its founding principles, prioritizing individualized attention, experiential learning, and community engagement. Students at ABC School are not just learners; they are active participants in their own education, encouraged to explore their interests, pursue their passions, and make a positive impact on the world around them.</p>
+
+    <p>Today, ABC School stands as a testament to Professor Rahman's vision, empowering generations of students to excel academically, thrive personally, and contribute meaningfully to Bangladeshi society. As it continues to adapt to the changing needs of the 21st century, ABC School remains committed to providing a transformative educational experience that prepares students for success in an increasingly interconnected and dynamic world.</p>
+</div>
+
             
        </section>
-       <br><br><br>
+       <br><br>
+       <!--     ====================Why to choose  Us================================================================= -->
+       <section class="abc">
        
+        <div class="text_new">
+            <h1 class="n_txt">Why to chose us!</h1>
+            <div class="school-features">
+    <h4>Academic Excellence</h4>
+    <p>Our rigorous curriculum and dedicated faculty ensure students excel academically, developing critical thinking and a deep understanding of subjects.</p>
+
+    <h4>Holistic Development</h4>
+    <p>We offer a range of extracurricular activities, including sports, arts, and music, fostering well-rounded individuals.</p>
+
+    <h4>Modern Facilities</h4>
+    <p>Our facilities include modern classrooms, well-stocked libraries, advanced labs, and extensive sports facilities, providing a conducive learning environment.</p>
+
+    <h4>Caring and Qualified Faculty</h4>
+    <p>Our passionate teachers provide personalized attention and use innovative methods to engage students and foster a love for learning.</p>
+
+    <h4>Safe and Inclusive Environment</h4>
+    <p>We maintain a safe and inclusive environment where every student feels valued, promoting diversity and ensuring equal opportunities for success.</p>
+</div>
+
+        </div>
+        <div class="new_image">
+        <img src="{{ asset('image/choose.png') }}">
+        </div>
+
+    </section>
 
 
+<br><br><br>
+
+
+        <!-- -------------- PROJECT BOX ---------------- -->
+
+        <section class="section" id="projects">
+            <div class="top-header">
+                <h1>Services</h1>
+            </div>
+            <div class="project-container">
+              <div class="project-box">
+              <i class="uil uil-bus-school"></i>
+                  <h3>Bus Service</h3>
+                  <label>10+ Buses</label>
+                  
+              </div>
+              <div class="project-box">
+              <i class="uil uil-utensils"></i>
+                  <h3>Lunch Service</h3>
+                  <label>Meal For Students</label>
+              </div>
+              <div class="project-box">
+              <i class="uil uil-graduation-cap"></i>
+                  <h3>Scholarship</h3>
+                  <label>Scholarship For Students</label>
+              </div>
+            </div>
+         </section>
+
+         <br><br>
 
 
 
@@ -332,8 +396,28 @@
             </form>
          </section>
 
+        <br><br><br>
 
 
+                 <!-- --------------- FOOTER --------------- -->
+      <footer>
+          <div class="top-footer">
+              <p>Abc School</p>
+          </div>
+          <div class="middle-footer">
+            
+          </div>
+          <div class="footer-social-icons">
+              <div class="icon"><i class="uil uil-facebook"></i></div>
+              <div class="icon"><i class="uil uil-github-alt"></i></div>
+          </div>
+          <div class="bottom-footer">
+              <p>A <a href="#home" style="text-decoration: none;"> Minhaz  Mahmud </a> - development.</p>
+          </div>
+       
+
+      </footer>
+  
 
 
 

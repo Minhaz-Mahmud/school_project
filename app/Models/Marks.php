@@ -11,5 +11,5 @@ class Marks extends Model
     protected $table = 'marks';
     protected $primaryKey = 'id';
     public $incrementing = false;
-    protected $fillable = ['id', 'exam','bangla','english','math','science'];
+    protected $fillable = ['id', 'exam','bangla','english','math','science','dew'];
 }

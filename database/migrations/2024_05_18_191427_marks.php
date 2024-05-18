@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('english')->nullable();
             $table->string('math')->nullable();
             $table->string('science')->nullable();
+
+            $table->string('dew')->nullable();
             
             $table->timestamps();
         });

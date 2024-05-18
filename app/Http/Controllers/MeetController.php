@@ -79,7 +79,7 @@ class MeetController extends Controller
              if ($schedule) {
                  $request->delete();
                  
-                 return redirect('teacher')->withSuccess('Meeting scheduled successfully.');
+                 return redirect('dash_m')->withSuccess('Meeting scheduled successfully.');
              }
          }
      
