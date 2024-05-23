@@ -9,5 +9,6 @@ class Mrequest extends Model
 {
     use HasFactory;
     protected $table = 'request';
-    protected $fillable = ['name', 'email','mobile','topic'];
+  protected $fillable = ['request_id', 'name', 'email', 'mobile', 'topic'];
+
 }

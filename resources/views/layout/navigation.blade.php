@@ -23,7 +23,7 @@
 
 <nav id="header">
     <div class="nav-logo">
-        <p class="nav-name">X SCHOOL</p>
+        <p class="nav-name">ABC SCHOOL</p>
         <span>_</span>
     </div>
     <div class="nav-menu" id="myNavMenu">
@@ -45,6 +45,8 @@
                 <a href="{{ route('dashboard') }}" class="nav-link   active-link">Dashboard</a>
                 <div class="circle"></div>
             </li>
+
+
 <!-- Rest of your navigation items -->            
               
                 
@@ -54,15 +56,19 @@
                
 
 
- @php
-    $loggedIn = Auth::guard('students')->check();
+                    @php
+   $loggedIn = session()->has('user_id');
+
     $loggedIn2 = Auth::guard('admin')->check();
     $loggedIn3 = Auth::guard('teacher_guard')->check();
 
+    $loggedIn4 = session()->has('u_user');
+
+
 @endphp
 
+
 @if ($loggedIn)
-    <!-- <a href="{{ route('logout') }}">Logout</a> -->
     <li class="nav_list">
                     < <a href="{{ route('logout') }}" class="nav-link">Logout</a>
                     <div class="circle"></div>
@@ -70,23 +76,29 @@
 
 @elseif ($loggedIn2)
 <li class="nav_list">
-                    < <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                    < <a href="{{ route('a_logout') }}" class="nav-link">Logout</a>
                     <div class="circle"></div>
                 </li>
 @elseif ($loggedIn3)
 <li class="nav_list">
-                    < <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                    < <a href="{{ route('t_logout') }}" class="nav-link">Logout</a>
+                    <div class="circle"></div>
+                </li>
+                @elseif ($loggedIn4)
+<li class="nav_list">
+                    < <a href="{{ route('u_logout') }}" class="nav-link">Logout</a>
                     <div class="circle"></div>
                 </li>
 
+                
 @else
     <select id="dropdown">
         <option value="">Login as</option>
         <option value="{{ route('login') }}">Student</option>
         <option value="{{ route('a_login') }}">Admin</option>
         <option value="{{ route('t_login') }}">Teacher</option>
+        <option value="{{ route('u_login') }}">User</option>
     </select>
-    <!-- Button to trigger redirection -->
     <button id="goButton" onclick="redirectToSelectedOption()">Login</button>
 
     <script>

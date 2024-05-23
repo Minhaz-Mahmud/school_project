@@ -110,6 +110,8 @@
                 <p>Email: {{ $r->email }}</p>
                 <p>Mobile: {{ $r->mobile }}</p>
                 <p>Topic: {{ $r->topic }}</p>
+               <a href=" {{url('add_reply/'.$r->request_id)}}">Press</a>
+            
             @else 
                 <p>No request to show</p>
             @endif

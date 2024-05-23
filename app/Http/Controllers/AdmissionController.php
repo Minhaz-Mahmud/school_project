@@ -29,8 +29,9 @@ class AdmissionController extends Controller
          'gender' => 'required',
          'previous_school' => 'required',
      ]);
- 
+     $userId = session('u_user');
      $notice = Admission::create([
+         'request_id' => $userId, 
          'name' => $request->name,
          'class' => $request->class,
          'age' => $request->age,
@@ -40,7 +41,7 @@ class AdmissionController extends Controller
  
      if ($notice) {
         
-             return redirect('');
+        return redirect(route('admission_f'))->with('success','Admission Form Filled Successfully');
         
      }
  

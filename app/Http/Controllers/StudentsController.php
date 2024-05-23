@@ -54,32 +54,79 @@ class StudentsController extends Controller
 
      
      
-     public function profile()
-     {
-         $user = Auth::guard('students')->user();
-         return view('auth.profile', ['user' => $user]);
-     }
+    //  public function profile()
+    //  {
+    //      $user = Auth::guard('students')->user();
+    //      return view('auth.profile', ['user' => $user]);
+    //  }
      
+    public function profile()
+    {
+        if (session()->has('user_id')) {
+            $user = Student::find(session('user_id'));
+    
+            if ($user) {
+                return view('auth.profile', ['user' => $user]);
+            }
+        }
+    
+        return redirect('login')->withErrors('You need to login first.');
+    }
+    
+    
+    
+
     
 
   
-     public function login(Request $request){
-          // dd($request->all());
-              $request->validate([
-              'email'=>'required',
-              'password'=>'required'
-          ]);
+    //  public function login(Request $request){
+    //       // dd($request->all());
+    //           $request->validate([
+    //           'email'=>'required',
+    //           'password'=>'required'
+    //       ]);
   
-          if (Auth::guard('students')->attempt($request->only('email', 'password'))) {
-            $user = Auth::guard('students')->user();
-            return redirect()->route('profile')->with('user', $user);
-        } else {
+    //       if (Auth::guard('students')->attempt($request->only('email', 'password'))) {
+    //         $user = Auth::guard('students')->user();
+    //         return redirect()->route('profile')->with('user', $user);
+    //     } else {
+    //         // Authentication failed
+    //         return redirect('login')->withError('Login details are not valid');
+    //     }
+  
+    //  }
+  
+    public function login(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+    
+        // Attempt to find the user in the custom table
+        $user = Student::where('email', $request->email)->first();
+    
+        // Check if the user exists and the password is correct
+        if ($user && Hash::check($request->password, $user->password)) {
+            // Store user ID in session
+            session(['user_id' => $user->id]);
+    
+            // Debugging: Check session data
+            // dd(session()->all());
+    
+            return redirect()->route('profile');
+        } 
+        else {
             // Authentication failed
-            return redirect('login')->withError('Login details are not valid');
+            return redirect('login')->withErrors('Login details are not valid');
         }
-  
-     }
-  
+    }
+    
+    
+    
+
+
      public function register_view(){
       return view('auth.register');
    }
@@ -205,18 +252,25 @@ public function update(int $id, Request $request)
    }
 
    
-   public function logout()
-   {
-       Log::info('Before logout: ' . json_encode(session()->all()));
+//    public function logout()
+//    {
+//        Log::info('Before logout: ' . json_encode(session()->all()));
    
-       Session::flush();
-       Auth::logout();
+//        Session::flush();
+//        Auth::logout();
    
-       Log::info('After logout: ' . json_encode(session()->all()));
+//        Log::info('After logout: ' . json_encode(session()->all()));
    
-       return redirect('');
-   }
+//        return redirect('');
+//    }
    
+
+public function logout()
+{
+    session()->forget('user_id');
+    return redirect('/');
+}
+
 
 
   public function destroy(Student $student){

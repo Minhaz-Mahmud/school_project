@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Admission extends Model
+class Reply extends Model
 {
-    protected $table = 'admission';
+
+    protected $table = 'reply';
     protected $fillable = [
         'request_id',
-         'name',
-         'class',
-         'gender',
-         'age',
-         'previous_school'
-];
+        'topic',
+        'message',
+    ];
+
+    
 }

@@ -8,10 +8,18 @@ use App\Http\Controllers\MarksController;
 use App\Http\Controllers\MeetController;
 use App\Http\Middleware\StudentAuthMiddleware;
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReplyController;
+
 
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
+
+
+// Route::get('/profile', [StudentsController::class, 'profile'])->middleware('auth.session');
+
 
 // Route::get('/login', function () {
 //     return view('welcome');
@@ -32,6 +40,8 @@ Route::get('/welcome', function () {
 Route::get('/',[StudentsController::class,'home'])->name('home');
 
 Route::get('/logout',[StudentsController::class,'logout'])->name('logout');
+Route::get('/a_logout',[AdminController::class,'logout'])->name('a_logout');
+Route::get('/t_logout',[TeacherController::class,'logout'])->name('t_logout');
 
 Route::get('/admission_f',[AdmissionController::class,'admission_view'])->name('admission_f');
 Route::post('/admission',[AdmissionController::class,'admission'])->name('admission');
@@ -55,7 +65,7 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
 
 
 
-    Route::get('/teacher_profile',[TeacherController::class,'teacher_profile'])->name('teacher_profile');
+    Route::get('/teacher_profile',[TeacherController::class,'teacher_profile'])->name('teacher_profile');  //own profile
     Route::get('/t_login',[TeacherController::class,'index'])->name('t_login');
     Route::post('/t_login',[TeacherController::class,'login'])->name('t_login');
 
@@ -79,9 +89,10 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
     // ======================================= =============Student Middlewarw=======================================================
     // ============================================================================================================================
 
+    Route::get('/profile',[StudentsController::class,'profile'])->name('profile');
 
     Route::middleware(StudentAuthMiddleware::class)->group(function () {
-        Route::get('/profile',[StudentsController::class,'profile'])->name('profile');
+       
 
         Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
         Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
@@ -173,3 +184,54 @@ use App\Http\Controllers\YourController;
 Route::post('/update-and-checkout/{id}', [MarksController::class, 'updateAndCheckout'])->name('updateAndCheckout');
 
     
+
+
+Route::get('/add_user',[UserController::class,'user_view'])->name('add_user');
+Route::post('/add_user',[UserController::class,'add_user'])->name('add_user');
+Route::delete('/user/{user}/destroy',[UserController::class,'destroy'])->name('user.destroy');
+Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
+Route::put('/user/{id}/update',[UserController::class,'update'])->name('user.update');
+
+Route::get('/u_login',[UserController::class,'u_login'])->name('u_login');
+ Route::post('/u_login',[UserController::class,'login'])->name('u_login');
+ Route::get('/u_logout',[UserController::class,'logout'])->name('u_logout');
+
+
+
+
+    Route::delete('/message/{message}/destroy',[NoticeController::class,'destroy2'])->name('notice.destroy2');
+
+
+
+
+// ===============================================User Middleware  =============================
+ Route::middleware(UserMiddleware::class)->group(function () {
+    Route::get('/admission_f',[AdmissionController::class,'admission_view'])->name('admission_f');
+    Route::post('/admission',[AdmissionController::class,'admission'])->name('admission');
+    Route::post('/add_msg',[NoticeController::class,'add_msg'])->name('message');
+    Route::delete('/message/{message}/destroy',[NoticeController::class,'destroy2'])->name('notice.destroy2');
+
+
+
+    
+    Route::get('/add_meet',[MeetController::class,'meet_view'])->name('add_meet');
+    Route::post('/add_meet',[MeetController::class,'add_meet'])->name('add_meet');
+
+
+
+    Route::get('/user_profile',[UserController::class,'profile'])->name('user_profile');
+    Route::delete('/reply/{reply}/destroy',[ReplyController::class,'destroy'])->name('reply.destroy');
+
+
+
+});
+
+
+Route::get('/add_reply/{r_id}/', [ReplyController::class, 'reply_view'])->name('reply_view');
+Route::post('/add_reply/{id}/', [ReplyController::class, 'add_reply'])->name('add_reply');
+
+Route::get('/admission_add_reply/{r_id}/', [ReplyController::class, 'admission_reply_view'])->name('admission_reply_view');
+Route::post('/admission_add_reply/{id}/', [ReplyController::class, 'admission_add_reply'])->name('admission_add_reply');
+
+
+

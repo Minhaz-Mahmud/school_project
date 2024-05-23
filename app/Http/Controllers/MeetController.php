@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Mrequest;
 use App\Models\Schedule;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
+
 use Illuminate\Http\Request;
 
 class MeetController extends Controller
@@ -27,33 +31,58 @@ class MeetController extends Controller
      
 
     
-    
+   
+
      public function add_meet(Request $request)
      {
-        
-
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required', 
-                'mobile' => 'required',
-                'topic' => 'required',
-            ]);
-     
-         $meet = Mrequest::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'mobile' => $request->mobile,
-            'topic' => $request->topic,
+         // Validate the request data
+         $request->validate([
+             'name' => 'required',
+             'email' => 'required|email',
+             'mobile' => 'required',
+             'topic' => 'required',
          ]);
      
-         if ($meet) {
-            
-                 return redirect('teacher');
-            
+         // Log request data
+         Log::info('Request data: ', $request->all());
+     
+         // Retrieve the user ID from the session
+         $userId = session('u_user');
+        
+
+
+     
+         // Log session data
+         Log::info('Session user_id: ' . $userId);
+     
+         // Check if the user ID exists
+         if (!$userId) {
+             return redirect('u_login')->withErrors('You need to login first.');
          }
      
-         return redirect('teacher')->withError('Registration failed.');
+         // Attempt to create the meet request
+         try {
+             $meet = Mrequest::create([
+                 'request_id' => $userId, // Use the user ID retrieved from the session
+                 'name' => $request->name,
+                 'email' => $request->email,
+                 'mobile' => $request->mobile,
+                 'topic' => $request->topic,
+             ]);
+     
+             if ($meet) {
+                 return redirect('teacher')->with('status', 'Meeting request added successfully.');
+             }
+         } catch (\Exception $e) {
+             // Log the error with detailed information
+             Log::error('Meeting request creation failed: ' . $e->getMessage(), ['exception' => $e]);
+             return redirect('teacher')->withErrors('Registration failed due to an error.');
+         }
+     
+         return redirect('teacher')->withErrors('Registration failed.');
      }
+     
+     
 
 
 
@@ -66,9 +95,11 @@ class MeetController extends Controller
      
         
          $request = Mrequest::find($id);
-     
+
+
          if ($request) {
              $schedule = Schedule::create([
+                'request_id' => $request->request_id,
                  'teacher_id' => $validatedData['teacher_id'],
                  'name' => $request->name,
                  'email' => $request->email,

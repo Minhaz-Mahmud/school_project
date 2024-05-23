@@ -25,6 +25,7 @@
                     <th>Gender</th>
                     <th>Age</th>
                     <th>Previous School</th>
+                    <th>Reply</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                     <td>{{ $admission->gender }}</td>
                     <td>{{ $admission->age }}</td>
                     <td>{{ $admission->previous_school }}</td>
+                    <td><a href=" {{url('admission_add_reply/'.$admission->request_id)}}">Press</a></td>
                     <td>
                         <form method="post" action="{{ route('admission.destroy', ['admission' => $admission]) }}">
                             @csrf

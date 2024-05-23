@@ -56,13 +56,15 @@
 
 <li class="nav_list">
                  
-               
-
-
+            
  @php
-    $loggedIn = Auth::guard('students')->check();
+   $loggedIn = session()->has('user_id');
+
     $loggedIn2 = Auth::guard('admin')->check();
     $loggedIn3 = Auth::guard('teacher_guard')->check();
+
+    $loggedIn4 = session()->has('u_user');
+
 
 @endphp
 
@@ -74,21 +76,28 @@
 
 @elseif ($loggedIn2)
 <li class="nav_list">
-                    < <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                    < <a href="{{ route('a_logout') }}" class="nav-link">Logout</a>
                     <div class="circle"></div>
                 </li>
 @elseif ($loggedIn3)
 <li class="nav_list">
-                    < <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                    < <a href="{{ route('t_logout') }}" class="nav-link">Logout</a>
+                    <div class="circle"></div>
+                </li>
+                @elseif ($loggedIn4)
+<li class="nav_list">
+                    < <a href="{{ route('u_logout') }}" class="nav-link">Logout</a>
                     <div class="circle"></div>
                 </li>
 
+                
 @else
     <select id="dropdown">
         <option value="">Login as</option>
         <option value="{{ route('login') }}">Student</option>
         <option value="{{ route('a_login') }}">Admin</option>
         <option value="{{ route('t_login') }}">Teacher</option>
+        <option value="{{ route('u_login') }}">User</option>
     </select>
     <button id="goButton" onclick="redirectToSelectedOption()">Login</button>
 

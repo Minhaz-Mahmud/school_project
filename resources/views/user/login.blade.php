@@ -6,18 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <style>
-   
+    /* Custom Styling */
     body {
-     
+      /* font-family: Arial, sans-serif;
+      background-color: #f8f9fa; */
       font-family: Arial, sans-serif;
-      background-image: url('/image/login6.jpg');
+      /* Set background image */
+      background-image: url('/image/login5.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
     
     .container {
-      margin-top: 130px;
+      margin-top: 50px;
     }
 
     .card {
@@ -26,9 +28,9 @@
     }
 
     .card-body {
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
       padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+
     }
 
     h1 {
@@ -55,7 +57,7 @@
     }
 
     input[type="submit"] {
-      padding: 12px 48px; 
+      padding: 12px 48px; /* Doubled the padding */
       border-radius: 5px;
       border: none;
       background-color: #007bff;
@@ -83,14 +85,14 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
-            <h1>Login as an Admin</h1>
+            <h1>Login as a User</h1>
             @if (Session::has('error'))
               <p class="text-danger">{{ Session::get('error') }}</p>
             @endif
             @if (Session::has('success'))
               <p class="text-success">{{ Session::get('success') }}</p>
             @endif
-            <form action="{{ route('a_login') }}" method="post">
+            <form action="{{ route('u_login') }}" method="post">
               @csrf
               @method('post')
               <div class="form-group">

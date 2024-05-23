@@ -1,3 +1,10 @@
+@if(session('success'))
+    <script type="text/javascript">
+        window.onload = function () { alert("{{ session('success') }}"); }
+    </script>
+@endif
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,17 +12,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Custom Styles for Registration Form */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      background-image: url('/image/login6.jpg');
       margin: 0;
       padding: 0;
+    
+
+
     }
 
     .container {
       max-width: 600px;
-      margin: 120px auto; /* Adjust margin-top for more space from the top */
+      margin: 120px auto; 
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
