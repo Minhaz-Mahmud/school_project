@@ -98,27 +98,20 @@ class StudentsController extends Controller
   
     public function login(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
     
-        // Attempt to find the user in the custom table
         $user = Student::where('email', $request->email)->first();
     
-        // Check if the user exists and the password is correct
         if ($user && Hash::check($request->password, $user->password)) {
-            // Store user ID in session
             session(['user_id' => $user->id]);
     
-            // Debugging: Check session data
-            // dd(session()->all());
     
             return redirect()->route('profile');
         } 
         else {
-            // Authentication failed
             return redirect('login')->withErrors('Login details are not valid');
         }
     }
@@ -173,9 +166,7 @@ class StudentsController extends Controller
        ]);
    
        if ($student) {
-        //    if (Auth::guard('students')->attempt($request->only('email', 'password'))) {
                return redirect('dash');
-        //    }
        }
    
        return redirect('register')->withError('Registration failed.');
@@ -190,7 +181,7 @@ public function update(int $id, Request $request)
         'image' => 'nullable|mimes:png,jpg,jpeg,webp',
         'name' => 'required',
         'gender' => 'required',
-        'birth' => 'required', 
+        'birth' => 'required',
         'roll' => 'required',
         'blood' => 'required',
         'email' => 'required|email',
@@ -199,30 +190,32 @@ public function update(int $id, Request $request)
         'phone' => 'required',
         'password' => 'nullable',
         'religion' => 'required',
-    ]);   
+    ]);
 
     $student = Student::findOrFail($id);
 
-    $path = ''; 
-    $filename = ''; 
-    if ($request->has('image')) {
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
-        $path = 'uploads/';
-        $file->move($path, $filename);
+    if ($image = $request->file('image')) {
+        // Delete the old image if it exists
         if (File::exists($student->image)) {
             File::delete($student->image);
         }
+
+        // Create a unique filename for the new image
+        $imageName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+        $path = 'uploads/';
+        
+        $image->move($path, $imageName);
+    } else {
+        $imageName = $student->image; 
     }
 
     $updatedData = [
-        'image' => $path . $filename, 
+        'image' => $imageName,
         'name' => $request->name,
         'gender' => $request->gender,
-        'date_of_birth' => $request->birth, 
+        'date_of_birth' => $request->birth,
         'roll' => $request->roll,
-        'blood_group' => $request->blood, 
+        'blood_group' => $request->blood,
         'religion' => $request->religion,
         'email' => $request->email,
         'class' => $request->class,
@@ -230,7 +223,7 @@ public function update(int $id, Request $request)
         'phone_number' => $request->phone,
     ];
 
-    // Update password only if provided by the user
+ 
     if ($request->filled('password')) {
         $updatedData['password'] = Hash::make($request->password);
     }
@@ -239,6 +232,7 @@ public function update(int $id, Request $request)
 
     return redirect(route('profile'))->with('success', 'Student Profile updated successfully');
 }
+
 
    
    
@@ -252,17 +246,7 @@ public function update(int $id, Request $request)
    }
 
    
-//    public function logout()
-//    {
-//        Log::info('Before logout: ' . json_encode(session()->all()));
-   
-//        Session::flush();
-//        Auth::logout();
-   
-//        Log::info('After logout: ' . json_encode(session()->all()));
-   
-//        return redirect('');
-//    }
+
    
 
 public function logout()

@@ -29,10 +29,8 @@ class AdminController extends Controller
           ]);
   
           if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
-            // Authentication successful
             return redirect('dash');
         } else {
-            // Authentication failed
             return redirect('login')->withError('Login details are not valid');
         }
   

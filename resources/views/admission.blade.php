@@ -19,7 +19,6 @@
       padding: 0;
     
 
-
     }
 
     .container {
@@ -72,13 +71,21 @@
 
     .text-danger {
       color: #dc3545;
+
     }
+      
+
+
+    
   </style>
 </head>
+
+
 <body>
 
 @include('layout.navigation')
 
+<section>
 <div class="container">
   <h1>Register for Admission</h1>
 
@@ -128,7 +135,13 @@
 
     <input type="submit" value="Register" />
   </form>
-</div>
+</div>  </section>
+
+
+
+
+
+     
 
 </body>
 </html>

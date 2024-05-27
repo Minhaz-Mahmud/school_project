@@ -3,38 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Title</title>
+    <title>Student Information</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for changing table color */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
         .custom-table {
-            /* background-color: #f8f9fa; */
-            background-color: #f8f9fa; /* Change this color code to your desired color */
+            background-color: #ffffff; 
+            border-radius: 10px; 
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .btn-custom {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .message {
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #d4edda;
+            color: #155724;
         }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-800">
     <div class="container mx-auto px-4 py-8">
-        <!-- Register Student Button -->
-        <a href="{{ route('register') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-            Register a student
+        <a href="{{ route('register') }}" class="btn btn-custom">
+            Register a Student
         </a>
         <br><br>
-        <!-- Success Message -->
         <div>
             @if(session()->has('success'))
-                <div>
+                <div class="message">
                     {{session('success')}}
                 </div>
             @endif
         </div>
-        <br><br><br><br><br>
-        <!-- Student Information Table -->
-        <h2 class="text-lg font-semibold mb-4">Student Information</h2>
+        <br>
+        <h2 class="section-title">Student Information</h2>
         <table class="table table-striped table-bordered custom-table">
             <thead class="thead-dark">
-                <!-- Table Header -->
                 <tr>
                     <th>ID</th>
                     <th>Image</th>
@@ -48,12 +77,10 @@
                     <th>Class</th>
                     <th>Section</th>
                     <th>Phone Number</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Table Body with student information -->
                 @foreach($students as $student)
                 <tr>
                     <td>{{ $student->id }}</td>
@@ -68,7 +95,6 @@
                     <td>{{ $student->class }}</td>
                     <td>{{ $student->section }}</td>
                     <td>{{ $student->phone_number }}</td>
-                    <td><a href="{{ route('student.edit', ['student' => $student]) }}" class="text-blue-500">Edit</a></td>
                     <td>
                         <form method="post" action="{{ route('student.destroy', ['student' => $student]) }}">
                             @csrf
@@ -82,15 +108,13 @@
         </table>
         <br><br>
         <!-- Add Student Marks Button -->
-        <a href="{{ route('add_marks') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+        <a href="{{ route('add_marks') }}" class="btn btn-custom">
             Add Student Marks
         </a>
-        <br><br><br>
-        <!-- Student Marks Table -->
-        <h2 class="text-lg font-semibold mb-4">Student Marks</h2>
+        <br><br>
+        <h2 class="section-title">Student Marks</h2>
         <table class="table table-striped table-bordered custom-table">
             <thead class="thead-dark">
-                <!-- Table Header -->
                 <tr>
                     <th>ID</th>
                     <th>Exam Name</th>
@@ -113,8 +137,7 @@
                     <td>{{ $mark->english }}</td>
                     <td>{{ $mark->math }}</td>
                     <td>{{ $mark->science }}</td>
-                    <td>{{ $mark->dew}}</td>
-
+                    <td>{{ $mark->dew }}</td>
                     <td><a href="{{ route('marks.edit', ['marks' => $mark]) }}" class="text-blue-500">Edit</a></td>
                     <td>
                         <form method="post" action="{{ route('marks.destroy', ['marks' => $mark]) }}">
@@ -128,5 +151,9 @@
             </tbody>
         </table>
     </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

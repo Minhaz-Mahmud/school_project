@@ -86,6 +86,10 @@
     </style>
 </head>
 <body>
+
+
+@include('layout.navigation')
+<br><br><br>
     <div class="container">
         <h1>Teacher Profile</h1>
 

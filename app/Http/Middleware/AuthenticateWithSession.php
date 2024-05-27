@@ -16,4 +16,3 @@ class AuthenticateWithSession
     }
 }
 
-// Apply middleware in routes if using custom middleware without Kernel

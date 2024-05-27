@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('marks', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned(); 
+            $table->bigIncrements('id')->unsigned();
+            $table->bigIncrements('student_id')->unsigned(); 
+            
+
             $table->string('exam')->nullable();
             $table->string('bangla')->nullable();
             $table->string('english')->nullable();

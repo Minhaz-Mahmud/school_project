@@ -35,7 +35,6 @@ class MeetController extends Controller
 
      public function add_meet(Request $request)
      {
-         // Validate the request data
          $request->validate([
              'name' => 'required',
              'email' => 'required|email',
@@ -43,27 +42,22 @@ class MeetController extends Controller
              'topic' => 'required',
          ]);
      
-         // Log request data
          Log::info('Request data: ', $request->all());
      
-         // Retrieve the user ID from the session
          $userId = session('u_user');
         
 
 
      
-         // Log session data
          Log::info('Session user_id: ' . $userId);
      
-         // Check if the user ID exists
          if (!$userId) {
              return redirect('u_login')->withErrors('You need to login first.');
          }
      
-         // Attempt to create the meet request
          try {
              $meet = Mrequest::create([
-                 'request_id' => $userId, // Use the user ID retrieved from the session
+                 'request_id' => $userId, 
                  'name' => $request->name,
                  'email' => $request->email,
                  'mobile' => $request->mobile,
@@ -74,7 +68,6 @@ class MeetController extends Controller
                  return redirect('teacher')->with('status', 'Meeting request added successfully.');
              }
          } catch (\Exception $e) {
-             // Log the error with detailed information
              Log::error('Meeting request creation failed: ' . $e->getMessage(), ['exception' => $e]);
              return redirect('teacher')->withErrors('Registration failed due to an error.');
          }

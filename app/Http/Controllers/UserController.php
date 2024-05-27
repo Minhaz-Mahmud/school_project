@@ -67,10 +67,8 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        // Forget the u_user session variable
         $request->session()->forget('u_user');
     
-        // Redirect the user to the login page with a success message
         return redirect('')->with('status', 'You have been logged out');
     }
     

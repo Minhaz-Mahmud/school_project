@@ -38,7 +38,6 @@ class TeacherController extends Controller
             $user = Auth::guard('teacher_guard')->user();
             return redirect()->route('teacher_profile')->with('user', $user);
         } else {
-            // Authentication failed
             return redirect('t_login')->withError('Login details are not valid');
         }
     }

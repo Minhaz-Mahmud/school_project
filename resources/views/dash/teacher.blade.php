@@ -27,7 +27,7 @@
                     <th>Gender</th>
                     <th>Age</th>
                     <th>Designation</th>
-                    <th>Edit</th>
+                    <!-- <th>Edit</th> -->
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -41,7 +41,7 @@
                         <td>{{$teacher->gender}}</td>
                         <td>{{$teacher->age}}</td>
                         <td>{{$teacher->designation}}</td>
-                        <td><a href="{{route('teacher.edit',['teacher'=>$teacher])}}" class="btn btn-primary">Edit</a></td>
+                        <!-- <td><a href="{{route('teacher.edit',['teacher'=>$teacher])}}" class="btn btn-primary">Edit</a></td> -->
                         <td>
                             <form method="post" action="{{route('teacher.destroy',['teacher'=>$teacher])}}" onsubmit="return confirm('Are you sure you want to delete this teacher?')">
                                 @csrf

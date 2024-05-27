@@ -17,48 +17,61 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: grid;
+            grid-template-rows: auto 1fr auto; /* Header, Content, Footer */
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: red;
+            margin-top: 20px;
+            transform: translateX(-80px); /* Shift heading 80px to the left */
+            text-decoration: underline;
+        }
+
+        .content {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            gap: 160px; /* Increased gap between dashboard and image */
+            padding: 20px;
         }
 
         .dashboard {
-            text-align: center;
-        }
-
-        .dashboard h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .buttons-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             justify-content: center;
-            gap: 20px;
+            align-self: center;
+            justify-self: center;
+            text-align: center;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 20px;
+            background-color: #fff;
+            height: auto; /* Ensure the height matches the content */
+            max-width: 300px; /* Adjust width as needed */
+        }
+
+        .dashboard > * {
+            margin-bottom: 45px; /* Increased margin between child elements */
         }
 
         .button-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            background-color: #fff; /* Changed background color to green */
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+            gap: 30px; /* Increased gap between buttons */
         }
 
         .button-group a {
             text-decoration: none;
-            margin: 10px;
+            display: block;
         }
 
         .button-group button {
             padding: 10px 20px;
-            background-color:  #007bff;
-            color:#fff ; /* Changed button text color to green */
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -66,13 +79,14 @@
         }
 
         .button-group button:hover {
-            background-color:orangered; /* Darker green on hover */
-            color: #fff;
+            background-color: orangered;
         }
 
+        img {
+            border-radius: 20px;
+        }
 
-        /* ----- FOOTER BOX ----- */
-footer{
+        footer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,36 +113,53 @@ footer{
     font-size: 14px;
     margin-top: 10px;
 }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
-          
 @include('layout.navigation')
+<br><br><br><br><br><br>
+<h1>Dashboard</h1><br><br><br>
+<div class="content">
     <div class="dashboard">
-        <br><br><br><br><br><br>
-        <h1>Dashboard</h1>
-        <div class="buttons-container">
-            <div class="button-group">
-                <a href="{{ route('dashboard_t') }}"><button>Teacher Section</button></a>
-                <a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
-            </div>
-            <div class="button-group">
-                <a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
-                <a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
-            </div>
-            <div class="button-group">
-                <a href="{{ route('dashboard_m') }}"><button>Meeting Section</button></a>
-                <a href="{{ route('dashboard_ad') }}"><button>Admission Section</button></a>
-            </div>
-            <div class="button-group">
-                <a href="{{ route('dashboard_me') }}"><button>Message Section</button></a>
-            </div>
+        <div class="button-group">
+            <a href="{{ route('dashboard_t') }}"><button>Teacher Section</button></a>
+            <a href="{{ route('dashboard_s') }}"><button>Student Section</button></a>
+            <a href="{{ route('dashboard_a') }}"><button>Admin Section</button></a>
+            <a href="{{ route('dashboard_n') }}"><button>Notice Section</button></a>
+            <a href="{{ route('dashboard_m') }}"><button>Meeting Section</button></a>
+            <a href="{{ route('dashboard_ad') }}"><button>Admission Section</button></a>
+            <a href="{{ route('dashboard_me') }}"><button>Message Section</button></a>
         </div>
     </div>
-    <br><br><br><br><br><br>
 
-                   <!-- --------------- FOOTER --------------- -->
-                   <footer>
+    <img src="{{ asset('image/admin.jpg') }}" alt="Description" style="border-radius: 20px;">
+</div>
+<br><br><br>
+                 <!-- --------------- FOOTER --------------- -->
+                 <footer>
           <div class="top-footer">
               <p>Abc School</p>
           </div>
@@ -145,9 +176,9 @@ footer{
        
 
       </footer>
+
 </body>
 </html>
-
 
 
 

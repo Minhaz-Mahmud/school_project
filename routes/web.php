@@ -84,6 +84,8 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
 
 
     
+    Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
+    Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
 
     
     // ======================================= =============Student Middlewarw=======================================================
@@ -94,8 +96,6 @@ Route::delete('/admission/{admission}/destroy',[AdmissionController::class,'dest
     Route::middleware(StudentAuthMiddleware::class)->group(function () {
        
 
-        Route::get('/student/{student}/edit',[StudentsController::class,'edit'])->name('student.edit');
-        Route::put('/student/{id}/update',[StudentsController::class,'update'])->name('student.update');
     });
 
 
